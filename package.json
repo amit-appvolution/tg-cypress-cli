@@ -14,7 +14,7 @@
   "dependencies": {
     "archiver": "5.3.0",
     "async": "3.2.3",
-    "testgrid-local": "1.5.4",
+    "testgrid-local": "git+https://github.com/amit-appvolution/tg-local.git",
     "chalk": "4.1.2",
     "cli-progress": "3.10.0",
     "fs-extra": "8.1.0",
