@@ -1,5 +1,5 @@
 {
-  "uploadUrl": "https://api-cloud.testgrid.com/automate-frameworks/cypress/upload",
+  "uploadUrl": "https://dev.testgrid.io/cypress-upload",
   "rails_host": "https://api.testgrid.com",
   "dashboardUrl": "https://automate.testgrid.com/dashboard/v2/builds/",
   "usageReportingUrl": "https://eds.testgrid.com:443/send_event_cy_internal",
