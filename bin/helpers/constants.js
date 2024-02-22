@@ -353,7 +353,7 @@ const filesToIgnoreWhileUploading = [
   ".idea/**",
   ".vscode/**",
   ".npm/**",
-  "bstackPackages.tar.gz",
+  "TGPackages.tar.gz",
   "tmpBstackPackages/**",
   ".yarn/**",
   "build_artifacts/**"

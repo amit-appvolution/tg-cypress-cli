@@ -772,7 +772,7 @@ exports.generateUploadOptions = (type, md5data, packageData) => {
         propogateError: false,
         fileDetails: {
           filetype: "tar.gz",
-          filename: "bstackPackages"
+          filename: "TGPackages"
         },
         messages: {
           uploading: Constants.userMessages.UPLOADING_NPM_PACKAGES,

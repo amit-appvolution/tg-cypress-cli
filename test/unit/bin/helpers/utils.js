@@ -410,7 +410,7 @@ describe('utils', () => {
         propogateError: false,
         fileDetails: {
           filetype: "tar.gz",
-          filename: "bstackPackages"
+          filename: "TGPackages"
         },
         messages: {
           uploading: constant.userMessages.UPLOADING_NPM_PACKAGES,
