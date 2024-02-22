@@ -54,7 +54,7 @@ const uploadSuits = (bsConfig, filePath, opts, obj) => {
 
     let options = utils.generateUploadParams(bsConfig, filePath, opts.md5Data, opts.fileDetails)
     let responseData = null;
-    logger.info(`Options - ${JSON.parse(options)}`);
+    logger.info(`Options - ${JSON.stringify(options)}`);
     var r = request.post(options, function (err, resp, body) {
 
       if (err) {
@@ -93,7 +93,7 @@ const uploadSuits = (bsConfig, filePath, opts, obj) => {
           }
         } else {
           purgeUploadBar(obj);
-          logger.info(`responseData - ${JSON.parse(responseData)}`);
+          logger.info(`responseData - ${JSON.stringify(responseData)}`);
           logger.info(`${opts.messages.uploadingSuccess} (${responseData[opts.md5ReturnKey]})`);
           opts.cleanupMethod();
           responseData["time"] = Date.now() - obj.startTime;
