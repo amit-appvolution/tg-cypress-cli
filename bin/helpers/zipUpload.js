@@ -55,10 +55,10 @@ const uploadSuits = (bsConfig, filePath, opts, obj) => {
     let options = utils.generateUploadParams(bsConfig, filePath, opts.md5Data, opts.fileDetails)
     let responseData = null;
     var r = request.post(options, function (err, resp, body) {
-      logger.info(`Options - ${JSON.stringify(options)}`);
-      logger.info(`resp - ${JSON.stringify(resp)}`);
-      logger.info(`body - ${JSON.stringify(body)}`);
-      logger.info(`err - ${JSON.stringify(err)}`);
+      // logger.info(`Options - ${JSON.stringify(options)}`);
+      // logger.info(`resp - ${JSON.stringify(resp)}`);
+      // logger.info(`body - ${JSON.stringify(body)}`);
+      // logger.info(`err - ${JSON.stringify(err)}`);
 
       if (err) {
         reject({message: err, stacktrace: utils.formatRequest(err, resp, body)});
@@ -96,8 +96,8 @@ const uploadSuits = (bsConfig, filePath, opts, obj) => {
           }
         } else {
           purgeUploadBar(obj);
-          logger.info(`responseData - ${JSON.stringify(responseData)}`);
-          logger.info(`opts - ${JSON.stringify(opts)}`);
+          // logger.info(`responseData - ${JSON.stringify(responseData)}`);
+          // logger.info(`opts - ${JSON.stringify(opts)}`);
           logger.info(`${opts.messages.uploadingSuccess} (${responseData[opts.md5ReturnKey]})`);
           opts.cleanupMethod();
           responseData["time"] = Date.now() - obj.startTime;
