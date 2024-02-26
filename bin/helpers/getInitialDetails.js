@@ -33,9 +33,9 @@ exports.getInitialDetails = (bsConfig, args, rawArgs) => {
         logger.info(`resp - ${JSON.stringify(resp)}`);
         logger.info(`responseData - ${JSON.stringify(responseData)}`);
         if(resp.statusCode != 200) {
-            logger.warn(`Warn: Get Initial Details Request failed with status code ${resp.statusCode}`);
-            utils.sendUsageReport(bsConfig, args, responseData["error"], Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
-            reject({message: responseData["error"], stacktrace: utils.formatRequest(err, resp, data)});
+            // logger.warn(`Warn: Get Initial Details Request failed with status code ${resp.statusCode}`);
+            utils.sendUsageReport(bsConfig, args, "Internal Server Error", Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
+            reject({message: "Internal Server Error", stacktrace: utils.formatRequest(err, resp, data)});
         } else {
             if(responseData.success){
                 if (!utils.isUndefined(responseData.grr) && responseData.grr.enabled && !utils.isUndefined(responseData.grr.urls)) {
@@ -45,7 +45,7 @@ exports.getInitialDetails = (bsConfig, args, rawArgs) => {
             }else{
                 logger.error(`${responseData.message}`);
                 utils.sendUsageReport(bsConfig, args, responseData.message, Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
-                reject({message: responseData.message, stacktrace: utils.formatRequest(err, resp, data)});
+                reject({});
             }
         //   if (!utils.isUndefined(responseData.grr) && responseData.grr.enabled && !utils.isUndefined(responseData.grr.urls)) {
         //     config.uploadUrl = responseData.grr.urls.upload_url;
