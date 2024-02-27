@@ -26,7 +26,7 @@ const createBuild = (bsConfig, zip) => {
       if (Constants.turboScaleObj.enabled) {
         options.url = Constants.turboScaleObj.buildUrl;
       }
-
+      logger.info(`Options - ${JSON.stringify(options)}`);
       request.post(options, function (err, resp, body) {
         if (err) {
           logger.error(utils.formatRequest(err, resp, body));
@@ -38,7 +38,7 @@ const createBuild = (bsConfig, zip) => {
           } catch (error) {
             build = null;
           }
-
+          logger.info(`build - ${JSON.stringify(build)}`);
           if (resp.statusCode == 299) {
             if (build) {
               resolve(build.message);

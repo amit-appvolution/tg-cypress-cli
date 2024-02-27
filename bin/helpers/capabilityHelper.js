@@ -4,6 +4,7 @@ const { readCypressConfigFile } = require('./readCypressConfigUtil');
 
 const logger = require("./logger").winstonLogger,
   Constants = require("./constants"),
+  config = require("./config"),
   Utils = require("./utils");
 
 const caps = (bsConfig, zip) => {
@@ -25,21 +26,27 @@ const caps = (bsConfig, zip) => {
     let browsersList = [];
     if (bsConfig.browsers) {
       bsConfig.browsers.forEach((element) => {
-        osBrowser = element.os + "-" + element.browser;
-        osAndBrowser = (element.os) ? element.os : "Any OS" + " / " + Utils.capitalizeFirstLetter(element.browser);
-        element.versions.forEach((version) => {
-          osBrowserArray.push(osBrowser + version);
-          browsersList.push(`${osAndBrowser} (${version})`);
-        });
+        if(Utils.isUndefined(config.browserAllowed[element.browser])){
+            reject("Unsupported browser detected!");
+        }else{
+          osBrowser = element.os + "-" + element.browser;
+          osAndBrowser = (element.os) ? element.os : "Any OS" + " / " + Utils.capitalizeFirstLetter(element.browser);
+          element.versions.forEach((version) => {
+            osBrowserArray.push(osBrowser + version);
+            browsersList.push(`${osAndBrowser} (${version})`);
+          });
+        }
       });
     }
     obj.devices = osBrowserArray;
     if (obj.devices.length == 0) reject(Constants.validationMessages.EMPTY_BROWSER_LIST);
+    logger.info(`OS Browsers list: ${osBrowserArray}`);
     logger.info(`Browsers list: ${browsersList.join(", ")}`);
+    logger.info(`zip: ${JSON.stringify(zip)}`);
 
     // Test suite
-    if (zip.zip_url && zip.zip_url.split("://")[1].length !== 0) {
-      obj.test_suite = zip.zip_url.split("://")[1];
+    if (zip.data.zip_url && zip.data.zip_url.split("://")[1].length !== 0) {
+      obj.test_suite = zip.data.zip_url.split("://")[1];
     } else {
       reject("Test suite is empty");
     }

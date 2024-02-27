@@ -28,29 +28,20 @@ exports.getInitialDetails = (bsConfig, args, rawArgs) => {
         } catch (e) {
           responseData = {};
         }
-        logger.info(`err - ${JSON.stringify(err)}`);
-        logger.info(`data - ${JSON.stringify(data)}`);
-        logger.info(`resp - ${JSON.stringify(resp)}`);
-        logger.info(`responseData - ${JSON.stringify(responseData)}`);
+        
         if(resp.statusCode != 200) {
-            // logger.warn(`Warn: Get Initial Details Request failed with status code ${resp.statusCode}`);
             utils.sendUsageReport(bsConfig, args, "Internal Server Error", Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
-            reject({message: "Internal Server Error", stacktrace: utils.formatRequest(err, resp, data)});
+            reject({message: `Get Initial Details Request failed with status code ${resp.statusCode}`, stacktrace: utils.formatRequest(err, resp, data)});
         } else {
             if(responseData.success){
-                if (!utils.isUndefined(responseData.grr) && responseData.grr.enabled && !utils.isUndefined(responseData.grr.urls)) {
-                    config.uploadUrl = responseData.grr.urls.upload_url;
+                if (!utils.isUndefined(responseData.data) && !utils.isUndefined(responseData.data.upload_url)) {
+                    config.uploadUrl = responseData.data.upload_url;
                 }
                 resolve(responseData);
             }else{
-                logger.error(`${responseData.message}`);
                 utils.sendUsageReport(bsConfig, args, responseData.message, Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
-                reject({});
+                reject(`${responseData.message}`);
             }
-        //   if (!utils.isUndefined(responseData.grr) && responseData.grr.enabled && !utils.isUndefined(responseData.grr.urls)) {
-        //     config.uploadUrl = responseData.grr.urls.upload_url;
-        //   }
-        //   resolve(responseData);
         }
       }
     });
