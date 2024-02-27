@@ -12,8 +12,8 @@ if(config.env !== "production") {
   config.usageReportingUrl = process.env.USAGE_REPORTING_URL;
 }
 
-config.cypress_v1 = `${config.rails_host}/automate/cypress/v1`;
-config.cypress_v2 = `${config.rails_host}/automate/cypress/v2`;
+config.cypress_v1 = `${config.rails_host}/cypress/v1`;
+config.cypress_v2 = `${config.rails_host}/cypress/v2`;
 config.buildUrl = `${config.cypress_v1}/builds/`;
 config.buildUrlV2 = `${config.cypress_v2}/builds/`;
 config.buildStopUrl = `${config.cypress_v1}/builds/stop/`;
@@ -30,5 +30,21 @@ config.configJsonFileName = 'tmpCypressConfig.json';
 // turboScale
 config.turboScaleMd5Sum = `${config.turboScaleUrl}/md5sumcheck`;
 config.turboScaleBuildsUrl = `${config.turboScaleUrl}/builds`;
+
+// TG Config
+config.browserAllowed = {
+  chrome: [
+    '120',
+    '121',
+    'latest',
+    'latest-1',
+  ],
+  firefox: [
+    '122',
+    '123',
+    'latest',
+    'latest-1',
+  ]
+}
 
 module.exports = config;

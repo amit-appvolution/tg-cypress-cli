@@ -98,7 +98,7 @@ const uploadSuits = (bsConfig, filePath, opts, obj) => {
           purgeUploadBar(obj);
           logger.info(`responseData - ${JSON.stringify(responseData)}`);
           logger.info(`opts - ${JSON.stringify(opts)}`);
-          logger.info(`${opts.messages.uploadingSuccess} (${responseData.zip_key})`);
+          logger.info(`${opts.messages.uploadingSuccess} (${responseData.data.run_id})`);
           opts.cleanupMethod();
           responseData["time"] = Date.now() - obj.startTime;
           resolve(responseData);

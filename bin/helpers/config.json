@@ -1,7 +1,7 @@
 {
-  "uploadUrl": "https://tejas.testgrid.io/cypress-upload",
+  "uploadUrl": "https://tejas.testgrid.io/cypress/v1/upload",
   "rails_host": "https://tejas.testgrid.io",
-  "dashboardUrl": "https://automate.testgrid.com/dashboard/v2/builds/",
+  "dashboardUrl": "https://tejas.testgrid.io/cypress_sessions/",
   "usageReportingUrl": "https://eds.testgrid.com:443/send_event_cy_internal",
   "localTestingListUrl": "https://www.testgrid.com/local/v1/list",
   "turboScaleUrl": "https://grid.testgrid.com/packages/cypress",

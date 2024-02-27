@@ -329,7 +329,7 @@ module.exports = function run(args, rawArgs) {
 
                 if (!args.disableNpmWarning && bsConfig.run_settings.npm_dependencies && Object.keys(bsConfig.run_settings.npm_dependencies).length <= 0) {
                   logger.warn(Constants.userMessages.NO_NPM_DEPENDENCIES);
-                  logger.warn(Constants.userMessages.NO_NPM_DEPENDENCIES_READ_MORE);
+                //   logger.warn(Constants.userMessages.NO_NPM_DEPENDENCIES_READ_MORE);
                 }
 
 
@@ -381,6 +381,9 @@ module.exports = function run(args, rawArgs) {
 
                 logger.info(message);
                 logger.info(dashboardLink);
+
+                utils.handleSyncExit(Constants.ERROR_EXIT_CODE, data.dashboard_url); // process exit by amit
+                
                 if(!args.sync) {
                   logger.info(Constants.userMessages.EXIT_SYNC_CLI_MESSAGE.replace("<build-id>",data.build_id));
                   printBuildLink(false);

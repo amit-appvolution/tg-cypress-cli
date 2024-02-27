@@ -32,31 +32,44 @@ const createBuild = (bsConfig, zip) => {
           logger.error(utils.formatRequest(err, resp, body));
           reject(err);
         } else {
-          let build = null;
-          try {
-            build = JSON.parse(body);
-          } catch (error) {
-            build = null;
-          }
-          logger.info(`build - ${JSON.stringify(build)}`);
-          if (resp.statusCode == 299) {
-            if (build) {
-              resolve(build.message);
-            } else {
-              logger.error(utils.formatRequest(err, resp, body));
-              reject(Constants.userMessages.API_DEPRECATED);
+            let build = null;
+            try {
+                build = JSON.parse(body);
+            } catch (error) {
+                build = null;
             }
-          } else if (resp.statusCode != 201) {
-            logger.error(utils.formatRequest(err, resp, body));
-            if (build) {
-              reject(`${Constants.userMessages.BUILD_FAILED} Error: ${build.message}`);
+            logger.info(`build - ${JSON.stringify(build)}`);
+
+            if(resp.statusCode != 200) {
+                logger.error(utils.formatRequest(err, resp, body));
+                reject(Constants.userMessages.BUILD_FAILED);
             } else {
-              reject(Constants.userMessages.BUILD_FAILED);
+                if(build.success){
+                    resolve(build);
+                }else{
+                    logger.error(utils.formatRequest(err, resp, body));
+                    reject(`${Constants.userMessages.BUILD_FAILED} Error: ${build.message}`);
+                }
             }
-          } else {
+
+            /* if (resp.statusCode == 299) {
+                if (build) {
+                resolve(build.message);
+                } else {
+                logger.error(utils.formatRequest(err, resp, body));
+                reject(Constants.userMessages.API_DEPRECATED);
+                }
+            } else if (resp.statusCode != 201) {
+                logger.error(utils.formatRequest(err, resp, body));
+                if (build) {
+                reject(`${Constants.userMessages.BUILD_FAILED} Error: ${build.message}`);
+                } else {
+                reject(Constants.userMessages.BUILD_FAILED);
+                }
+            } else {
+                resolve(build);
+            } */
             resolve(build);
-          }
-          resolve(build);
         }
       })
     }).catch(function(err){

@@ -32,15 +32,21 @@ const caps = (bsConfig, zip) => {
           osBrowser = element.os + "-" + element.browser;
           osAndBrowser = (element.os) ? element.os : "Any OS" + " / " + Utils.capitalizeFirstLetter(element.browser);
           element.versions.forEach((version) => {
-            osBrowserArray.push(osBrowser + version);
+            // osBrowserArray.push(osBrowser + version);
             browsersList.push(`${osAndBrowser} (${version})`);
+            let browser_data = {
+                browser: element.browser,
+                os: element.os,
+                version: version,
+            }
+            osBrowserArray.push(browser_data);
           });
         }
       });
     }
     obj.devices = osBrowserArray;
     if (obj.devices.length == 0) reject(Constants.validationMessages.EMPTY_BROWSER_LIST);
-    logger.info(`OS Browsers list: ${osBrowserArray}`);
+    logger.info(`OS Browsers list: ${JSON.stringify(osBrowserArray)}`);
     logger.info(`Browsers list: ${browsersList.join(", ")}`);
     logger.info(`zip: ${JSON.stringify(zip)}`);
 
