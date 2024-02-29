@@ -29,26 +29,28 @@ const caps = (bsConfig, zip) => {
         if(Utils.isUndefined(config.browserAllowed[element.browser])){
             reject("Unsupported browser detected!");
         }else{
-          osBrowser = element.os + "-" + element.browser;
-          osAndBrowser = (element.os) ? element.os : "Any OS" + " / " + Utils.capitalizeFirstLetter(element.browser);
-          element.versions.forEach((version) => {
-            // osBrowserArray.push(osBrowser + version);
-            browsersList.push(`${osAndBrowser} (${version})`);
-            let browser_data = {
-                browser: element.browser,
-                os: element.os,
-                version: version,
-            }
-            osBrowserArray.push(browser_data);
-          });
+            osBrowser = element.os + "-" + element.browser;
+            osAndBrowser = (element.os) ? element.os : "Any OS" + " / " + Utils.capitalizeFirstLetter(element.browser);
+            element.versions.forEach((version) => {
+                if(!Utils.isUndefined(config.browserAllowed[element.browser]) && Utils.isUndefined(config.browserAllowed[element.browser][version])){
+                    // osBrowserArray.push(osBrowser + version);
+                    browsersList.push(`${osAndBrowser} (${version})`);
+                    let browser_data = {
+                        browser: element.browser,
+                        os: element.os,
+                        version: version,
+                    }
+                    osBrowserArray.push(browser_data);
+                }else{
+                    reject("Unsupported browser version detected!");
+                }
+            });
         }
       });
     }
     obj.devices = osBrowserArray;
     if (obj.devices.length == 0) reject(Constants.validationMessages.EMPTY_BROWSER_LIST);
-    logger.info(`OS Browsers list: ${JSON.stringify(osBrowserArray)}`);
-    logger.info(`Browsers list: ${browsersList.join(", ")}`);
-    logger.info(`zip: ${JSON.stringify(zip)}`);
+    // logger.info(`OS Browsers list: ${JSON.stringify(osBrowserArray)}`);
 
     // Test suite
     if (zip.data.zip_url && zip.data.zip_url.split("://")[1].length !== 0) {

@@ -26,7 +26,7 @@ const createBuild = (bsConfig, zip) => {
       if (Constants.turboScaleObj.enabled) {
         options.url = Constants.turboScaleObj.buildUrl;
       }
-      logger.info(`Options - ${JSON.stringify(options)}`);
+    //   logger.info(`Options - ${JSON.stringify(options)}`);
       request.post(options, function (err, resp, body) {
         if (err) {
           logger.error(utils.formatRequest(err, resp, body));
@@ -38,18 +38,22 @@ const createBuild = (bsConfig, zip) => {
             } catch (error) {
                 build = null;
             }
-            logger.info(`build - ${JSON.stringify(build)}`);
+            // logger.info(`build - ${JSON.stringify(build)}`);
 
-            if(resp.statusCode != 200) {
-                logger.error(utils.formatRequest(err, resp, body));
-                reject(Constants.userMessages.BUILD_FAILED);
-            } else {
-                if(build.success){
-                    resolve(build);
-                }else{
+            if(!utils.nonEmptyArray(build)){
+                if(resp.statusCode != 200) {
                     logger.error(utils.formatRequest(err, resp, body));
-                    reject(`${Constants.userMessages.BUILD_FAILED} Error: ${build.message}`);
+                    reject(Constants.userMessages.BUILD_FAILED);
+                } else {
+                    if(build.success){
+                        resolve(build);
+                    }else{
+                        logger.error(utils.formatRequest(err, resp, body));
+                        reject(`${Constants.userMessages.BUILD_FAILED} Error: ${build.message}`);
+                    }
                 }
+            }else{
+                reject(`${Constants.userMessages.TESTGRID_API_ERROR}`);
             }
 
             /* if (resp.statusCode == 299) {

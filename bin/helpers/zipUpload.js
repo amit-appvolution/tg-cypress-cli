@@ -56,9 +56,6 @@ const uploadSuits = (bsConfig, filePath, opts, obj) => {
     let responseData = null;
     var r = request.post(options, function (err, resp, body) {
       // logger.info(`Options - ${JSON.stringify(options)}`);
-      // logger.info(`resp - ${JSON.stringify(resp)}`);
-      // logger.info(`body - ${JSON.stringify(body)}`);
-      // logger.info(`err - ${JSON.stringify(err)}`);
 
       if (err) {
         reject({message: err, stacktrace: utils.formatRequest(err, resp, body)});
@@ -68,40 +65,49 @@ const uploadSuits = (bsConfig, filePath, opts, obj) => {
         } catch (e) {
           responseData = {};
         }
-        if (resp.statusCode != 200) {
-          if (resp.statusCode == 401) {
-            if (responseData && responseData["error"]) {
-              responseData["time"] = Date.now() - obj.startTime;
-              return reject({message: responseData["error"], stacktrace: utils.formatRequest(err, resp, body)});
+        // logger.info(`responseData - ${JSON.stringify(responseData)}`);
+        if(!utils.nonEmptyArray(responseData)){
+            if(resp.statusCode != 200) {
+                if (resp.statusCode == 401) {
+                    if (responseData && responseData["error"]) {
+                    responseData["time"] = Date.now() - obj.startTime;
+                    return reject({message: responseData["error"], stacktrace: utils.formatRequest(err, resp, body)});
+                    } else {
+                    return reject({message: Constants.validationMessages.INVALID_DEFAULT_AUTH_PARAMS, stacktrace: utils.formatRequest(err, resp, body)});
+                    } 
+                }
+                if (!opts.propogateError){
+                    purgeUploadBar(obj);
+                    if (resp.statusCode == 413) {
+                    return resolve({warn: Constants.userMessages.NODE_MODULES_LIMIT_EXCEEDED.replace("%SIZE%", (size / 1000000).toFixed(2))});
+                    }
+                    return resolve({})
+                }
+                if(responseData && responseData["error"]){
+                    responseData["time"] = Date.now() - obj.startTime;
+                    reject({message: responseData["error"], stacktrace: utils.formatRequest(err, resp, body)});
+                } else {
+                    if (resp.statusCode == 413) {
+                    reject({message: Constants.userMessages.ZIP_UPLOAD_LIMIT_EXCEEDED, stacktrace: utils.formatRequest(err, resp, body)});
+                    } else {
+                    reject({message: Constants.userMessages.ZIP_UPLOADER_NOT_REACHABLE, stacktrace: utils.formatRequest(err, resp, body)});
+                    }
+                }
             } else {
-              return reject({message: Constants.validationMessages.INVALID_DEFAULT_AUTH_PARAMS, stacktrace: utils.formatRequest(err, resp, body)});
-            } 
-          }
-          if (!opts.propogateError){
-            purgeUploadBar(obj);
-            if (resp.statusCode == 413) {
-              return resolve({warn: Constants.userMessages.NODE_MODULES_LIMIT_EXCEEDED.replace("%SIZE%", (size / 1000000).toFixed(2))});
+                purgeUploadBar(obj);
+                
+                if(responseData.success){
+                    logger.info(`${opts.messages.uploadingSuccess} (${responseData.data.run_id})`);
+                    opts.cleanupMethod();
+                    responseData["time"] = Date.now() - obj.startTime;
+                    resolve(responseData);
+                }else{
+                    utils.sendUsageReport(bsConfig, args, responseData.message, Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
+                    reject(`${responseData.message}`);
+                }
             }
-            return resolve({})
-          }
-          if(responseData && responseData["error"]){
-            responseData["time"] = Date.now() - obj.startTime;
-            reject({message: responseData["error"], stacktrace: utils.formatRequest(err, resp, body)});
-          } else {
-            if (resp.statusCode == 413) {
-              reject({message: Constants.userMessages.ZIP_UPLOAD_LIMIT_EXCEEDED, stacktrace: utils.formatRequest(err, resp, body)});
-            } else {
-              reject({message: Constants.userMessages.ZIP_UPLOADER_NOT_REACHABLE, stacktrace: utils.formatRequest(err, resp, body)});
-            }
-          }
-        } else {
-          purgeUploadBar(obj);
-          logger.info(`responseData - ${JSON.stringify(responseData)}`);
-          logger.info(`opts - ${JSON.stringify(opts)}`);
-          logger.info(`${opts.messages.uploadingSuccess} (${responseData.data.run_id})`);
-          opts.cleanupMethod();
-          responseData["time"] = Date.now() - obj.startTime;
-          resolve(responseData);
+        }else{
+            reject(`${Constants.userMessages.TESTGRID_API_ERROR}`);
         }
       }
     });

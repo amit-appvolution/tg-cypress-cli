@@ -27,7 +27,7 @@ const userMessages = {
   BUILD_STOP_FAILED: "Failed to stop build.",
   BUILD_REPORT_MESSAGE: "See the entire build report here:",
   ZIP_UPLOADER_NOT_REACHABLE:
-    "Could not reach TestGrid APIs. Please check your network or see if you need to whitelist *.testgrid.com",
+    "Could not reach TestGrid APIs. Please check your network or see if you need to whitelist *.testgrid.io",
   ZIP_UPLOAD_FAILED: "Zip Upload failed.",
   ZIP_UPLOAD_LIMIT_EXCEEDED:
     "The directory size which contains the cypress config file is more than 200 MB. For more info, check out https://www.testgrid.com/docs/automate/cypress/exclude-files",
@@ -123,7 +123,9 @@ const userMessages = {
   CYPRESS_PORT_WARNING:
     "The requested port number <x> is ignored. The default TestGrid port will be used for this execution",
   CYPRESS_INTERACTIVE_SESSION_CONFLICT_VALUES:
-    "Conflicting values (True & False) were found for the interactive_debugging capability. Please resolve this issue to proceed further."
+    "Conflicting values (True & False) were found for the interactive_debugging capability. Please resolve this issue to proceed further.",
+  TESTGRID_API_ERROR:
+    "Could not reach TestGrid APIs. Please check your network or contact support at support@testgrid.io",
 };
 
 const validationMessages = {

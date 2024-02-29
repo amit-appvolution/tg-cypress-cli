@@ -29,19 +29,23 @@ exports.getInitialDetails = (bsConfig, args, rawArgs) => {
           responseData = {};
         }
         
-        if(resp.statusCode != 200) {
-            utils.sendUsageReport(bsConfig, args, "Internal Server Error", Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
-            reject({message: `Get Initial Details Request failed with status code ${resp.statusCode}`, stacktrace: utils.formatRequest(err, resp, data)});
-        } else {
-            if(responseData.success){
-                if (!utils.isUndefined(responseData.data) && !utils.isUndefined(responseData.data.upload_url)) {
-                    config.uploadUrl = responseData.data.upload_url;
+        if(!utils.nonEmptyArray(responseData)){
+            if(resp.statusCode != 200) {
+                utils.sendUsageReport(bsConfig, args, "Internal Server Error", Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
+                reject({message: `Get Initial Details Request failed with status code ${resp.statusCode}`, stacktrace: utils.formatRequest(err, resp, data)});
+            } else {
+                if(responseData.success){
+                    if (!utils.isUndefined(responseData.data) && !utils.isUndefined(responseData.data.upload_url)) {
+                        config.uploadUrl = responseData.data.upload_url;
+                    }
+                    resolve(responseData);
+                }else{
+                    utils.sendUsageReport(bsConfig, args, responseData.message, Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
+                    reject(`${responseData.message}`);
                 }
-                resolve(responseData);
-            }else{
-                utils.sendUsageReport(bsConfig, args, responseData.message, Constants.messageTypes.ERROR, 'get_initial_details_failed', null, rawArgs);
-                reject(`${responseData.message}`);
             }
+        }else{
+            reject(`${Constants.userMessages.TESTGRID_API_ERROR}`);
         }
       }
     });
