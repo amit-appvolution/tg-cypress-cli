@@ -30,9 +30,9 @@ const userMessages = {
     "Could not reach TestGrid APIs. Please check your network or see if you need to whitelist *.testgrid.io",
   ZIP_UPLOAD_FAILED: "Zip Upload failed.",
   ZIP_UPLOAD_LIMIT_EXCEEDED:
-    "The directory size which contains the cypress config file is more than 200 MB. For more info, check out https://www.testgrid.com/docs/automate/cypress/exclude-files",
+    "The directory size which contains the cypress config file is more than 200 MB.",
   NODE_MODULES_LIMIT_EXCEEDED:
-    "node_modules upload failed as the size %SIZE% MB is not supported. Dependencies will be installed in runtime. This will have a negative impact on build performance. Reach out to us at testgrid.com/support if you see this warning.",
+    "node_modules upload failed as the size %SIZE% MB is not supported. Dependencies will be installed in runtime. This will have a negative impact on build performance. Reach out to us at testgrid.io/contact?request=support if you see this warning.",
   CONFIG_FILE_CREATED:
     "TestGrid Config File created, you can now run testgrid-cypress --config-file run",
   CONFIG_FILE_EXISTS:
@@ -60,11 +60,11 @@ const userMessages = {
   CONFLICTING_INIT_ARGUMENTS:
     "Conflicting arguments given. You can use --path only with a file name, and not with a file path.",
   NO_PARALLELS:
-    "Your specs will run sequentially on a single machine. Read more about running your specs in parallel here: https://www.testgrid.com/docs/automate/cypress/run-tests-in-parallel",
+    "Your specs will run sequentially on a single machine. Read more about running your specs in parallel here: https://www.testgrid.io/docs/automate/cypress/run-tests-in-parallel",
   NO_NPM_DEPENDENCIES:
     "No npm dependencies specified - your specs might fail if they need any packages to be installed before running.",
   NO_NPM_DEPENDENCIES_READ_MORE:
-    "Read more about npm dependencies here: https://www.testgrid.com/docs/automate/cypress/npm-packages. You can suppress this warning by using --disable-npm-warning flag.",
+    "Read more about npm dependencies here: https://www.testgrid.io/docs/automate/cypress/npm-packages. You can suppress this warning by using --disable-npm-warning flag.",
   VALIDATING_CONFIG: "Validating the config",
   UPLOADING_TESTS: "Uploading the tests to TestGrid",
   UPLOADING_TESTS_SUCCESS: "Uploaded tests successfully",
@@ -84,13 +84,13 @@ const userMessages = {
   RETRY_LIMIT_EXCEEDED: `Max retries exceeded trying to connect to the host (retries: ${config.retries})`,
   CHECK_DASHBOARD_AT: "Please check the build status at: ",
   CYPRESS_VERSION_CHANGED:
-    "Your build will run using Cypress <actualVersion> instead of Cypress <preferredVersion>.<frameworkUpgradeMessage> Read more about supported versions here: http://testgrid.com/docs/automate/cypress/supported-versions",
+    "Your build will run using Cypress <actualVersion> instead of Cypress <preferredVersion>.<frameworkUpgradeMessage> Read more about supported versions here: http://testgrid.io/docs/automate/cypress/supported-versions",
   LOCAL_START_FAILED: "Local Testing setup failed.",
   LOCAL_STOP_FAILED: "Local Binary stop failed.",
   INVALID_TIMEZONE:
-    'The timezone specified is invalid. Refer to our documentation page https://www.testgrid.com/docs/automate/cypress/configure-timezones for the supported time zones.',
+    'The timezone specified is invalid. Refer to our documentation page https://www.testgrid.io/docs/automate/cypress/configure-timezones for the supported time zones.',
   INVALID_LOCAL_MODE_WARNING:
-    'Invalid value specified for local_mode. local_mode: ("always-on" | "on-demand"). For more info, check out https://www.testgrid.com/docs/automate/cypress/cli-reference',
+    'Invalid value specified for local_mode. local_mode: ("always-on" | "on-demand"). For more info, check out https://www.testgrid.io/docs/automate/cypress/cli-reference',
   LOCAL_BINARY_ALREADY_RUNNING:
     "We found an existing TestGrid Local connection running from your account. Using the existing connection for this build. If you wish to use a new Local connection for your build, please specify a value for 'local_identifier' within 'connection_settings' in your testgrid.json config.",
   SPEC_LIMIT_WARNING:
@@ -104,18 +104,18 @@ const userMessages = {
   DOWNLOAD_BUILD_ARTIFACTS_SUCCESS:
     "Your build artifact(s) have been successfully downloaded in '<user-path>/build_artifacts/<build-id>' directory",
   LATEST_SYNTAX_TO_ACTUAL_VERSION_MESSAGE:
-    "Your build will run using Cypress <actualVersion> as you had specified <latestSyntaxVersion>.<frameworkUpgradeMessage> Read more about supported versions here: http://testgrid.com/docs/automate/cypress/supported-versions",
+    "Your build will run using Cypress <actualVersion> as you had specified <latestSyntaxVersion>.<frameworkUpgradeMessage> Read more about supported versions here: http://testgrid.io/docs/automate/cypress/supported-versions",
   PROCESS_KILL_MESSAGE:
     "Stopping the CLI and the execution of the build on TestGrid",
   BUILD_FAILED_ERROR:
     "The above stacktrace has been thrown by Cypress when we tried to run your build. If your test suite requires npm dependencies then please specify them on testgrid.json. Read more at " +
     chalk.blueBright(
-      "https://www.testgrid.com/docs/automate/cypress/npm-packages"
+      "https://www.testgrid.io/docs/automate/cypress/npm-packages"
     ) +
     ". Also, we recommend you to try running the build locally using ‘cypress run’ and if it works fine then please reach out to support at " +
-    chalk.blueBright("https://www.testgrid.com/contact#technical-support"),
+    chalk.blueBright("https://www.testgrid.io/contact#technical-support"),
   SPEC_TIMEOUT_LIMIT_WARNING:
-    "Value for the 'spec_timeout' key not in the 1-120 range. Going ahead with 30 mins as the default spec timeout. Read more about how to specify the option in https://testgrid.com/docs/automate/cypress/spec-timeout",
+    "Value for the 'spec_timeout' key not in the 1-120 range. Going ahead with 30 mins as the default spec timeout. Read more about how to specify the option in https://testgrid.io/docs/automate/cypress/spec-timeout",
   SPEC_LIMIT_SUCCESS_MESSAGE:
     "Spec timeout specified as <x> minutes. If any of your specs exceed the specified time limit, it would be forcibly killed by TestGrid",
   NO_CONNECTION_WHILE_UPDATING_UPLOAD_PROGRESS_BAR:
@@ -135,9 +135,9 @@ const validationMessages = {
   EMPTY_TESTGRID_JSON: "Empty testgrid.json",
   EMPTY_RUN_SETTINGS: "Empty run settings",
   EMPTY_CYPRESS_PROJ_DIR:
-    "cypress_proj_dir is not set in run_settings. See https://www.testgrid.com/docs/automate/cypress/sample-tutorial to learn more.",
+    "cypress_proj_dir is not set in run_settings. See https://www.testgrid.io/docs/automate/cypress/sample-tutorial to learn more.",
   EMPTY_CYPRESS_CONFIG_FILE:
-    "cypress_config_file is not set in run_settings. See https://www.testgrid.com/docs/automate/cypress/configuration-file to learn more.",
+    "cypress_config_file is not set in run_settings. See https://www.testgrid.io/docs/automate/cypress/configuration-file to learn more.",
   EMPTY_SPECS_IN_TESTGRID_JSON:
     "specs is required when enforce_settings is true in run_settings of testgrid.json",
   VALIDATED: "testgrid.json file is validated",
@@ -153,31 +153,31 @@ const validationMessages = {
     "Cypress does not allow more than one cypress config file.",
   INVALID_CYPRESS_JSON: "cypress.json is not a valid json",
   INVALID_DEFAULT_AUTH_PARAMS:
-    "Your username and access key are required to run your tests on TestGrid. Learn more at https://www.testgrid.com/docs/automate/cypress/authentication",
+    "Your username and access key are required to run your tests on TestGrid. Learn more at https://www.testgrid.io/docs/automate/cypress/authentication",
   LOCAL_NOT_SET:
-    "To test <baseUrlValue> on TestGrid, you will have to set up Local testing. Read more here: https://www.testgrid.com/docs/automate/cypress/local-testing",
+    "To test <baseUrlValue> on TestGrid, you will have to set up Local testing. Read more here: https://www.testgrid.io/docs/automate/cypress/local-testing",
   INCORRECT_DIRECTORY_STRUCTURE:
     "No tests to run. Note that your Cypress tests should be in the same directory where the cypress.json exists.",
   INVALID_CLI_LOCAL_IDENTIFIER:
-    "When using --local-identifier, a value needs to be supplied. \n--local-identifier <String>.\nFor more info, check out https://www.testgrid.com/docs/automate/cypress/cli-reference",
+    "When using --local-identifier, a value needs to be supplied. \n--local-identifier <String>.\nFor more info, check out https://www.testgrid.io/docs/automate/cypress/cli-reference",
   INVALID_LOCAL_MODE:
-    'When using --local-mode, a value needs to be supplied. \n--local-mode ("always-on" | "on-demand").\nFor more info, check out https://www.testgrid.com/docs/automate/cypress/cli-reference',
+    'When using --local-mode, a value needs to be supplied. \n--local-mode ("always-on" | "on-demand").\nFor more info, check out https://www.testgrid.io/docs/automate/cypress/cli-reference',
   INVALID_LOCAL_CONFIG_FILE:
-    "Using --local-config-file requires an input of the form /path/to/config-file.yml.\nFor more info, check out https://www.testgrid.com/docs/automate/cypress/cli-reference",
+    "Using --local-config-file requires an input of the form /path/to/config-file.yml.\nFor more info, check out https://www.testgrid.io/docs/automate/cypress/cli-reference",
   INVALID_LOCAL_IDENTIFIER:
-    "Invalid value specified for local_identifier. For more info, check out https://www.testgrid.com/docs/automate/cypress/cli-reference",
+    "Invalid value specified for local_identifier. For more info, check out https://www.testgrid.io/docs/automate/cypress/cli-reference",
   INVALID_BROWSER_ARGS:
-    "Aborting as an unacceptable value was passed for --browser. Read more at https://www.testgrid.com/docs/automate/cypress/cli-reference",
+    "Aborting as an unacceptable value was passed for --browser. Read more at https://www.testgrid.io/docs/automate/cypress/cli-reference",
   INVALID_LOCAL_ASYNC_ARGS:
     "Cannot run in --async mode when local is set to true. Please run the build after removing --async",
   INVALID_GEO_LOCATION:
-    "[TESTGRID_INVALID_COUNTRY_CODE] The country code specified for 'geolocation' is invalid. For list of supported countries, refer to -  https://www.testgrid.com/ip-geolocation",
+    "[TESTGRID_INVALID_COUNTRY_CODE] The country code specified for 'geolocation' is invalid. For list of supported countries, refer to -  https://www.testgrid.io/ip-geolocation",
   NOT_SUPPORTED_GEO_LOCATION:
-    "The country code you have passed for IP Geolocation is currently not supported. Please refer the link https://www.testgrid.com/ip-geolocation for a list of supported countries.",
+    "The country code you have passed for IP Geolocation is currently not supported. Please refer the link https://www.testgrid.io/ip-geolocation for a list of supported countries.",
   NOT_AVAILABLE_GEO_LOCATION:
     "The country code you have passed for IP Geolocation is not available at the moment. Please try again in a few hours.",
   ACCESS_DENIED_GEO_LOCATION:
-    "'geolocation' (IP Geolocation feature) capability is not supported in your account. It is only available under Enterprise plans, refer https://www.testgrid.com/ip-geolocation for more details.",
+    "'geolocation' (IP Geolocation feature) capability is not supported in your account. It is only available under Enterprise plans, refer https://www.testgrid.io/ip-geolocation for more details.",
   NOT_ALLOWED_GEO_LOCATION_AND_LOCAL_MODE:
     "IP Geolocation feature is not available in conjunction with TestGrid Local.",
   HOME_DIRECTORY_NOT_FOUND:
@@ -187,9 +187,9 @@ const validationMessages = {
   CYPRESS_CONFIG_FILE_NOT_PART_OF_HOME_DIRECTORY:
     "Could not find cypress.json within the specified home directory. Please make sure cypress.json resides within the home directory.",
   SPEC_TIMEOUT_LIMIT_ERROR:
-    "The maximum allowed value of 'spec_timeout' is 120. Read more on https://testgrid.com/docs/automate/cypress/spec-timeout ",
+    "The maximum allowed value of 'spec_timeout' is 120.",
   SPEC_TIMEOUT_NOT_PASSED_ERROR:
-    "'spec_timeout' key not specified. Going ahead with 30 mins as the default spec timeout. Read more about how to specify the option in https://testgrid.com/docs/automate/cypress/spec-timeout ",
+    "'spec_timeout' key not specified. Going ahead with 30 mins as the default spec timeout.",
   PROJECT_ID_MISSING:
     "You have specified '--record' flag but you've not provided the 'projectId' in cypress.json or in testgrid.json. Your record functionality on cypress.io dashboard might not work as it needs both the key and the projectId",
   RECORD_KEY_MISSING:
@@ -232,13 +232,13 @@ const cliMessages = {
     BUILD_REPORT_MESSAGE: "See the entire build report here",
     HEADED: "Run your tests in a headed browser instead of a headless browser",
     LOCAL:
-      "Accepted values: (true | false) - create a local testing connection to let you test staging and localhost websites, or sites behind proxies; learn more at testgrid.com/local-testing",
+      "Accepted values: (true | false) - create a local testing connection to let you test staging and localhost websites, or sites behind proxies; learn more at testgrid.io/local-testing",
     LOCAL_MODE:
       'Accepted values: ("always-on" | "on-demand") - if you choose to keep the binary "always-on", it will speed up your tests by keeping the Local connection warmed up in the background; otherwise, you can choose to have it spawn and killed for every build',
     LOCAL_IDENTIFIER:
       "Accepted values: String - assign an identifier to your Local process instance",
     LOCAL_CONFIG_FILE:
-      "Accepted values: String - path to local config-file to your Local process instance. Learn more at https://www.testgrid.com/local-testing/binary-params",
+      "Accepted values: String - path to local config-file to your Local process instance. Learn more at https://www.testgrid.io/local-testing/binary-params",
     SYNC_NO_WRAP:
       "Wrap the spec names in --sync mode in case of smaller terminal window size pass --no-wrap",
     BROWSER_DESCRIPTION: "Specify the browsers you need to run your tests on.",
@@ -247,7 +247,7 @@ const cliMessages = {
     REPORTER: "Specify the custom reporter to use",
     REPORTER_OPTIONS: "Specify reporter options for custom reporter",
     CYPRESS_GEO_LOCATION: "Enterprise feature to simulate website and mobile behavior from different locations.",
-    SPEC_TIMEOUT: "Specify a value for a hard timeout for each spec execution in the 1-120 mins range. Read https://testgrid.com/docs/automate/cypress/spec-timeout for more details.",
+    SPEC_TIMEOUT: "Specify a value for a hard timeout for each spec execution in the 1-120 mins range. Read https://testgrid.io/docs/automate/cypress/spec-timeout for more details.",
     RECORD: "Pass the --record flag to record your Cypress runs on Cypress.io dashboard. Note: You also need to specify '--record-key' and '--projectId' arguments either in CLI or in testgrid.json.",
     RECORD_KEY: "You can specify the 'key' that is needed to record your runs on Cypress.io dashboard using the '--record-key' argument. Alternatively, you can also pass it on testgrid.json",
     PROJECT_ID: "You can pass the 'projectId' of your Cypress.io project where you want to record your runs if specifying the '--record' key. You can also specify this in your cypress.json or in your testgrid.json.",

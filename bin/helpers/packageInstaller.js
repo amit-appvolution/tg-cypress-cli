@@ -154,7 +154,7 @@ const packageSetupAndInstaller = (bsConfig, packageDir, instrumentBlocks) => {
       Object.assign(obj, { packagesInstalled: true });
       return resolve(obj);
     }).catch((err) => {
-      logger.warn(`Error occured while installing npm dependencies. Dependencies will be installed in runtime. This will have a negative impact on performance. Reach out to testgrid.com/contact, if you persistantly face this issue.`);
+      logger.warn(`Error occured while installing npm dependencies. Dependencies will be installed in runtime. This will have a negative impact on performance. Reach out to testgrid.io/contact, if you persistantly face this issue.`);
       obj.error = err.stack ? err.stack.toString().substring(0,100) : err.toString().substring(0,100);
       return resolve(obj);
     })
@@ -184,7 +184,7 @@ const packageWrapper = (bsConfig, packageDir, packageFile, md5data, instrumentBl
       Object.assign(obj, { packageArchieveCreated: true });
       return resolve(obj);
     }).catch((err) => {
-      logger.warn(`Error occured while caching npm dependencies. Dependencies will be installed in runtime. This will have a negative impact on performance. Reach out to testgrid.com/contact, if you persistantly face this issue.`);
+      logger.warn(`Error occured while caching npm dependencies. Dependencies will be installed in runtime. This will have a negative impact on performance. Reach out to testgrid.io/contact, if you persistantly face this issue.`);
       obj.error = err.stack ? err.stack.toString().substring(0,100) : err.toString().substring(0,100);
       return resolve(obj);
     })

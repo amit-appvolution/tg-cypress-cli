@@ -1,1 +1,1 @@
-exports.API_URL = 'https://accessibility.testgrid.com/api';
+exports.API_URL = 'https://accessibility.testgrid.io/api';

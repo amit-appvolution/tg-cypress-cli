@@ -88,7 +88,7 @@ exports.printBuildLink = async (shouldStopSession, exitCode = null) => {
         && process.env.BS_TESTOPS_BUILD_HASHED_ID != "null" 
         && process.env.BS_TESTOPS_BUILD_HASHED_ID != "undefined") {
           console.log();
-          logger.info(`Visit https://observability.testgrid.com/builds/${process.env.BS_TESTOPS_BUILD_HASHED_ID} to view build report, insights, and many more debugging information all at one place!\n`);
+          logger.info(`Visit https://observability.testgrid.io/builds/${process.env.BS_TESTOPS_BUILD_HASHED_ID} to view build report, insights, and many more debugging information all at one place!\n`);
       }
     } catch(err) {
       exports.debug('Build Not Found');
@@ -594,7 +594,7 @@ exports.setTestObservabilityFlags = (bsConfig) => {
     exports.debug(`EXCEPTION while parsing testgridAutomation capability with error ${e}`, true, e);
   }
   
-  if(isTestObservabilitySession) logger.warn("testObservability is set to true. Other test reporters you are using will be automatically disabled. Learn more at testgrid.com/docs/test-observability/overview/what-is-test-observability");
+  // if(isTestObservabilitySession) logger.warn("testObservability is set to true. Other test reporters you are using will be automatically disabled. Learn more at testgrid.io/docs/test-observability/overview/what-is-test-observability");
 
   process.env.TESTGRID_TEST_OBSERVABILITY = isTestObservabilitySession;
   process.env.TESTGRID_AUTOMATION = isTestgridInfra;

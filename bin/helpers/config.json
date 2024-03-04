@@ -2,8 +2,8 @@
   "uploadUrl": "https://tejas.testgrid.io/cypress/v1/upload",
   "rails_host": "https://tejas.testgrid.io",
   "dashboardUrl": "https://tejas.testgrid.io/cypress_sessions/",
-  "usageReportingUrl": "https://eds.testgrid.com:443/send_event_cy_internal",
-  "localTestingListUrl": "https://www.testgrid.com/local/v1/list",
-  "turboScaleUrl": "https://grid.testgrid.com/packages/cypress",
-  "turboScaleAPIUrl": "https://api.testgrid.com/automate-turboscale/v1"
+  "usageReportingUrl": "https://eds.testgrid.io:443/send_event_cy_internal",
+  "localTestingListUrl": "https://www.testgrid.io/local/v1/list",
+  "turboScaleUrl": "https://grid.testgrid.io/packages/cypress",
+  "turboScaleAPIUrl": "https://api.testgrid.io/automate-turboscale/v1"
 }
